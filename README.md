@@ -70,13 +70,14 @@ brew install sleepwatcher
 
 找到你的 **米家智能显示器挂灯1S**，记录 DID 号。
 
-### 4. 修改配置
+### 4. 创建配置文件
 
-编辑 `mi_light_controller.py`，修改 `DEVICE_DID`：
-
-```python
-# 设备DID（从设备列表中获取）
-DEVICE_DID = "你的设备DID"
+```bash
+cat > ~/.mi_light_config.json << 'EOF'
+{
+    "device_did": "你的设备DID号"
+}
+EOF
 ```
 
 ### 5. 启动服务
@@ -102,10 +103,13 @@ launchctl load ~/Library/LaunchAgents/com.milight.screenmonitor.plist
 ├── screen_monitor.py        # 锁屏/解锁监听器
 ├── sleep_script.sh          # 睡眠时执行
 ├── wakeup_script.sh         # 唤醒时执行
+├── config.example.json      # 配置文件示例
 └── README.md
 
 ~/.config/mijia-api/
 └── auth.json                # 小米账号认证文件
+
+~/.mi_light_config.json      # 设备配置文件（DID号）
 
 ~/.sleep                     # sleepwatcher 睡眠脚本
 ~/.wakeup                    # sleepwatcher 唤醒脚本
@@ -207,6 +211,7 @@ launchctl unload ~/Library/LaunchAgents/com.milight.screenmonitor.plist
 # 删除文件
 rm -rf ~/mi_light_control
 rm -f ~/.sleep ~/.wakeup
+rm -f ~/.mi_light_config.json
 rm -f ~/.mi_light_control.log ~/.mi_light_monitor.log
 rm -f ~/Library/LaunchAgents/com.milight.screenmonitor.plist
 

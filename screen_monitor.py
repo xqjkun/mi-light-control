@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/python3.11
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Mac屏幕状态监听器
@@ -11,8 +11,8 @@ import os
 import subprocess
 import objc
 
-# 控制脚本路径
-CONTROLLER = "/Users/sxq/mi_light_control/mi_light_controller.py"
+# 控制脚本路径（自动获取当前目录）
+CONTROLLER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mi_light_controller.py")
 # 日志文件
 LOG_FILE = os.path.expanduser("~/.mi_light_control.log")
 
@@ -34,7 +34,7 @@ def control_light(action):
     """控制挂灯"""
     try:
         subprocess.run(
-            ["/opt/homebrew/bin/python3.11", CONTROLLER, action],
+            [sys.executable, CONTROLLER, action],
             capture_output=True,
             timeout=15
         )
