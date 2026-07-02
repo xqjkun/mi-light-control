@@ -229,4 +229,4 @@ brew uninstall sleepwatcher
 
 ## License
 
-MIT
+GPL-3.0（因依赖的 mijiaAPI 使用 GPL-3.0 许可证）
